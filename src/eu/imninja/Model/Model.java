@@ -4,26 +4,41 @@ import eu.imninja.GUI.JFrames.MessageGUI;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.awt.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Model {
 
     private List<File> files = new ArrayList<>();
     private ObservableList<String> data;
 
+    /**
+     * Adds File to the Filelist which corresponds to the ListView
+     * @param f
+     */
     public void addToList(File f) {
         if(!files.contains(f)) {
             files.add(f);
         }
     }
 
+    /**
+     * Clears all Entry in FileList, this corresponds o the ListView
+     */
     public void clearList() {
         files.clear();
     }
 
+    /**
+     * Swaps Places the an Item in the List
+     * @param item Name of the Selected Item
+     * @param code KeyCode Value that got Pressed
+     * @return Index for SelectSystem for a Dynamic Experience
+     */
     public int move(String item,String code) {
         Optional<File> f = files.stream().filter(file -> file.getName().equals(item)).findFirst();
         boolean type = code.equals("UP");
@@ -42,17 +57,28 @@ public class Model {
         files.set(oldIndex,newFile);
         return newindex;
     }
+
+    /**
+     * Creates the Model for the ListView
+     * @return
+     */
     public ObservableList<String> getModel() {
         data = FXCollections.observableArrayList();
         files.forEach(file -> data.add(file.getName()));
         return  data;
     }
 
-    public boolean renameAllFiles(String format) {
+    /**
+     * Renames all Filesentry with the Format as Example
+     * @param format The Formating Rule for all Files
+     * @return boolean = true if all files got renamed
+     */
+    public boolean renameAllFiles(String format,boolean openFolder) {
         String formatting = (!format.equals(""))? format: "NoName $ep";
+        AtomicReference<String> folderPath = new AtomicReference<>("");
         try {
             files.forEach(file -> {
-
+                folderPath.set(file.getPath().replace(file.getName(), ""));
                 String path = file.getPath();
                 String name = file.getName();
                 String episodeNumber = String.format("%02d",(files.indexOf(file)+1));
@@ -60,7 +86,8 @@ public class Model {
                 String newPath = path.replace(name,newname);
                 file.renameTo(new File(newPath));
             });
-            files.clear();
+            clearList();
+            if(openFolder)Desktop.getDesktop().open(new File(folderPath.get()));
         } catch (Exception e){
             new MessageGUI(e.getLocalizedMessage());
             return false;
@@ -70,6 +97,10 @@ public class Model {
 
     }
 
+    /**
+     * Deletes File out of the List with the Name of the File
+     * @param item Name of the File that gets deleted
+     */
     public void deleteSelected(String item) {
         Optional<File> f = files.stream().filter(file -> file.getName().equals(item)).findFirst();
         files.remove(f.get());

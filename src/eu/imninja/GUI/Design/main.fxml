@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
@@ -29,5 +30,6 @@
       </Text>
       <Text fill="#867f7f" layoutX="278.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="DEL: Löscht Selektierten Eintrag" />
       <Text fill="#867f7f" layoutX="278.0" layoutY="205.0" strokeType="OUTSIDE" strokeWidth="0.0" text="X: Löscht komplette Liste" />
+      <CheckBox fx:id="openFolder" layoutX="259.0" layoutY="305.0" mnemonicParsing="false" text="Ordner öffnen" />
    </children>
 </AnchorPane>
