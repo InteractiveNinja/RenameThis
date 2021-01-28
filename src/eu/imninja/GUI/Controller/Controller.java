@@ -48,14 +48,14 @@ public class Controller {
     public void keyPressed(){
         FileList.setOnKeyPressed((e) ->{
             String keypress = e.getCode().toString();
-            String selected = FileList.getSelectionModel().getSelectedItem().toString();
+            String selected = (FileList.getSelectionModel().getSelectedItem() != null)? FileList.getSelectionModel().getSelectedItem().toString() : "";
             if(keypress.equals("UP") || keypress.equals("DOWN") ) {
 
                 int index = model.move(selected,e.getCode().toString());
                 FileList.getSelectionModel().select(index);
             }
             if(keypress.equals("DELETE")) {
-                model.deleteSelected(selected);
+                    if(!selected.equals(""))model.deleteSelected(selected);
             }
 
 

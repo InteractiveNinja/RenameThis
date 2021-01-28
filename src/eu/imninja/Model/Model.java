@@ -45,7 +45,7 @@ public class Model {
     }
 
     public boolean renameAllFiles(String format) {
-        String formatting = (format.equals(""))? format: "NoName $ep";
+        String formatting = (!format.equals(""))? format: "NoName $ep";
         try {
             files.forEach(file -> {
 
