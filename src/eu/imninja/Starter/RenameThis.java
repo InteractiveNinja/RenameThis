@@ -12,8 +12,8 @@ public class RenameThis extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("../GUI/Design/main.fxml"));
-        primaryStage.getIcons().add(new Image(getClass().getResource("../Images/icon.png").toExternalForm()));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("eu/imninja/GUI/Design/main.fxml"));
+        primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResource("eu/imninja/Images/icon.png").toExternalForm()));
         primaryStage.setTitle("Rename This!");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
