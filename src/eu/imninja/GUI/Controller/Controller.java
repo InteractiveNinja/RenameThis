@@ -22,7 +22,7 @@ public class Controller {
     ListView FileList;
     public void renameFiles() {
         if(model.renameAllFiles(formatting.getText())) {
-        new MessageGUI("all Good");
+        new MessageGUI("Dateien wurden unbenannt");
         formatting.clear();
         fillList();
 
@@ -36,7 +36,6 @@ public class Controller {
     public void loadFiles() {
 
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Episodes");
         fileChooser.setInitialDirectory(FileSystemView.getFileSystemView().getHomeDirectory());
         List<File> f = fileChooser.showOpenMultipleDialog(new Stage());
         if(f != null) f.forEach(file -> model.addToList(file));
@@ -45,14 +44,24 @@ public class Controller {
 
     private void fillList() {
         FileList.setItems(model.getModel());
+        System.out.println("Filling List");
     }
     public void keyPressed(){
         FileList.setOnKeyPressed((e) ->{
+            String keypress = e.getCode().toString();
             String selected = FileList.getSelectionModel().getSelectedItem().toString();
-            System.out.println(e.getText());
-            int index = model.move(selected,e.getCode().toString());
+            System.out.println(keypress);
+            if(keypress.equals("UP") || keypress.equals("DOWN") ) {
+
+                int index = model.move(selected,e.getCode().toString());
+                FileList.getSelectionModel().select(index);
+            }
+            if(keypress.equals("DELETE")) {
+                model.deleteSelected(selected);
+            }
+
+
             fillList();
-            FileList.getSelectionModel().select(index);
         });
 
     }

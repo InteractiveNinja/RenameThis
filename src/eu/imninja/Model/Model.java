@@ -24,13 +24,13 @@ public class Model {
         Optional<File> f = files.stream().filter(file -> file.getName().equals(item)).findFirst();
         boolean type = code.equals("UP");
         int oldIndex = files.indexOf(f.get());
-        int newindex = 0;
+        int newindex;
         if(type ){
          newindex = Math.max(oldIndex - 1, 0);
 
         } else {
 
-        newindex = (oldIndex + 1 < files.size() -1) ? oldIndex +1 : files.size() -1;
+        newindex = Math.min(oldIndex + 1, files.size() - 1);
         }
         File oldFile = files.get(oldIndex);
         File newFile = files.get(newindex);
@@ -50,12 +50,13 @@ public class Model {
     }
 
     public boolean renameAllFiles(String format) {
+        String formatting = (format.equals(""))? format: "NoName {ep}";
         try {
             files.forEach(file -> {
 
                 String path = file.getPath();
                 String name = file.getName();
-                String newname = format.replace("{ep}",""+(files.indexOf(file)+1));
+                String newname = formatting.replace("{ep}",""+(files.indexOf(file)+1));
                 String newPath = path.replace(name,newname);
                 file.renameTo(new File(newPath));
             });
@@ -67,6 +68,11 @@ public class Model {
         return true;
 
 
+    }
+
+    public void deleteSelected(String item) {
+        Optional<File> f = files.stream().filter(file -> file.getName().equals(item)).findFirst();
+        files.remove(f.get());
     }
 
 
