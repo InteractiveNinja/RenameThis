@@ -36,12 +36,7 @@ public class Model {
         File newFile = files.get(newindex);
         files.set(newindex,oldFile);
         files.set(oldIndex,newFile);
-        if(type) {
-        return newindex+1;
-        } else {
-            return newindex-1;
-
-        }
+        return newindex;
     }
     public ObservableList<String> getModel() {
         data = FXCollections.observableArrayList();
@@ -50,13 +45,13 @@ public class Model {
     }
 
     public boolean renameAllFiles(String format) {
-        String formatting = (format.equals(""))? format: "NoName {ep}";
+        String formatting = (format.equals(""))? format: "NoName $ep";
         try {
             files.forEach(file -> {
 
                 String path = file.getPath();
                 String name = file.getName();
-                String newname = formatting.replace("{ep}",""+(files.indexOf(file)+1));
+                String newname = formatting.replace("$ep",""+(files.indexOf(file)+1));
                 String newPath = path.replace(name,newname);
                 file.renameTo(new File(newPath));
             });

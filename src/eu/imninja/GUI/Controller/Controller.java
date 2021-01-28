@@ -44,13 +44,11 @@ public class Controller {
 
     private void fillList() {
         FileList.setItems(model.getModel());
-        System.out.println("Filling List");
     }
     public void keyPressed(){
         FileList.setOnKeyPressed((e) ->{
             String keypress = e.getCode().toString();
             String selected = FileList.getSelectionModel().getSelectedItem().toString();
-            System.out.println(keypress);
             if(keypress.equals("UP") || keypress.equals("DOWN") ) {
 
                 int index = model.move(selected,e.getCode().toString());
