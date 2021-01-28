@@ -20,6 +20,10 @@ public class Model {
         }
     }
 
+    public void clearList() {
+        files.clear();
+    }
+
     public int move(String item,String code) {
         Optional<File> f = files.stream().filter(file -> file.getName().equals(item)).findFirst();
         boolean type = code.equals("UP");
@@ -51,7 +55,8 @@ public class Model {
 
                 String path = file.getPath();
                 String name = file.getName();
-                String newname = formatting.replace("$ep",""+(files.indexOf(file)+1));
+                String episodeNumber = String.format("%02d",(files.indexOf(file)+1));
+                String newname = formatting.replace("$ep",""+episodeNumber);
                 String newPath = path.replace(name,newname);
                 file.renameTo(new File(newPath));
             });

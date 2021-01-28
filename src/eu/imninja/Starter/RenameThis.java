@@ -16,7 +16,9 @@ public class RenameThis extends Application {
         primaryStage.getIcons().add(new Image(getClass().getClassLoader().getResource("eu/imninja/Images/icon.png").toExternalForm()));
         primaryStage.setTitle("Rename This!");
         primaryStage.setScene(new Scene(root));
+        primaryStage.setResizable(false);
         primaryStage.show();
+
     }
 
 

@@ -5,6 +5,8 @@ import eu.imninja.Model.Model;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -22,10 +24,12 @@ public class Controller {
     ListView FileList;
     public void renameFiles() {
         if(model.renameAllFiles(formatting.getText())) {
-        new MessageGUI("Dateien wurden unbenannt");
+        new MessageGUI("Dateien wurden unbenannt!");
         formatting.clear();
         fillList();
-
+        } else {
+            new MessageGUI("crash or so");
+            System.exit(0);
         }
     }
 
@@ -56,6 +60,16 @@ public class Controller {
             }
             if(keypress.equals("DELETE")) {
                     if(!selected.equals(""))model.deleteSelected(selected);
+            }
+
+            if(keypress.equals("L")) {
+                ClipboardContent c = new ClipboardContent();
+                c.putString(selected);
+                Clipboard.getSystemClipboard().setContent(c);
+            }
+
+            if(keypress.equals("X")) {
+                model.clearList();
             }
 
 
