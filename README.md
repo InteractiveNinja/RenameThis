@@ -20,6 +20,6 @@ This program is meant to simply rename multiple files according to a certain for
 
 ## Screenshots
 
-![Screenshot from the Programmm without Files loaded](/screenshots/sc1.png)
+![Screenshot from the Programmm without Files loaded](/screenshots/sc1.PNG)
 
-![Screenshot from the Programmm with Files loaded](/screenshots/sc2.png)
+![Screenshot from the Programmm with Files loaded](/screenshots/sc2.PNG)
