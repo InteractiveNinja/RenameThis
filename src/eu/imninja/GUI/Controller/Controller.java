@@ -54,9 +54,6 @@ public class Controller {
         new MessageGUI("Dateien wurden unbenannt!");
         formatting.clear();
         fillList();
-        } else {
-            new MessageGUI("crash or so");
-            System.exit(0);
         }
     }
 

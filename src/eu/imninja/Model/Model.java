@@ -76,6 +76,7 @@ public class Model {
     public boolean renameAllFiles(String format,boolean openFolder) {
         String formatting = (!format.equals(""))? format: "NoName $ep";
         AtomicReference<String> folderPath = new AtomicReference<>("");
+        if(files.size() == 0) return false;
         try {
             files.forEach(file -> {
                 folderPath.set(file.getPath().replace(file.getName(), ""));
