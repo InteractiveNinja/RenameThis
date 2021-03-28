@@ -1,5 +1,6 @@
 package eu.imninja.GUI.Controller;
 
+import eu.imninja.GUI.JFrames.ConfirmPromptGUI;
 import eu.imninja.GUI.JFrames.MessageGUI;
 import eu.imninja.Model.Model;
 import javafx.fxml.FXML;
@@ -50,11 +51,19 @@ public class Controller {
      * onClick this Event will be Triggered
      */
     public void renameFiles() {
-        if(model.renameAllFiles(formatting.getText(),openFolder.isSelected())) {
-        new MessageGUI("Dateien wurden unbenannt!");
-        formatting.clear();
-        fillList();
+        String format = formatting.getText();
+        String renamePreview = model.fileRenamePreview(format);
+        if(ConfirmPromptGUI.ShowConfirmMessage(renamePreview)) {
+            if(model.renameAllFiles(formatting.getText(),openFolder.isSelected())) {
+                new MessageGUI("Dateien wurden unbenannt!");
+                formatting.clear();
+                fillList();
+            }
+        } else {
+            new MessageGUI("Es wurden keine Datein umbennant!");
         }
+
+
     }
 
     /**
