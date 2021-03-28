@@ -97,6 +97,20 @@ public class Model {
 
 
     }
+    public String fileRenamePreview(String format) {
+        String formatting = (!format.equals(""))? format: "NoName $ep";
+
+        StringBuilder renames = new StringBuilder();
+
+        files.forEach(file -> {
+            String name = file.getName();
+            String episodeNumber = String.format("%02d",(files.indexOf(file)+1));
+            String newname = formatting.replace("$ep",""+episodeNumber);
+            renames.append(name + " -> " + newname + "\n");
+        });
+
+        return renames.toString();
+    }
 
     /**
      * Deletes File out of the List with the Name of the File
