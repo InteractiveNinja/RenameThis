@@ -1,3 +1,6 @@
+# Depracted new maybe Development at [Here](https://github.com/InteractiveNinja/RenameThisMaven)
+
+
 # RenameThis
 **A Simple Java Serie Renamer**
 
